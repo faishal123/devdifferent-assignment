@@ -5,7 +5,7 @@ import Link from "next/link";
 import { PropertyType } from "@/models/property";
 import { getSanityImageUrl } from "@/utils/sanity";
 import { formatCurrency } from "@/utils/common";
-import { IconDoor, IconMapPin } from "@tabler/icons-react";
+import { IconArrowLeft, IconDoor, IconMapPin } from "@tabler/icons-react";
 
 const PROPERTY_QUERY = `*[_type == "property" && slug.current == $slug][0]`;
 
@@ -22,16 +22,15 @@ export default async function Page({
 
     return (
         <main className="container mx-auto min-h-screen max-w-3xl p-8 flex flex-col gap-4">
-            <Link href="/" className="hover:underline">
-                ← Back to posts
+            <Link href="/" className="p-2 flex gap-2 items-center rounded-md w-fit hover:bg-gray-100 transition-colors">
+                <IconArrowLeft size={16} />
+                <p>Home</p>
             </Link>
             {propertyImageUrl && (
                 <img
                     src={propertyImageUrl}
                     alt={property.title}
-                    className="aspect-video rounded-xl"
-                    width="550"
-                    height="310"
+                    className="w-full h-100 object-cover rounded-lg mb-4"
                 />
             )}
             <div>
@@ -47,7 +46,7 @@ export default async function Page({
                         <p>Rooms: {property.roomNumber || "N/A"}</p>
                     </div>
                 </div>
-                <div className="prose">
+                <div className="prose text-justify">
                     {Array.isArray(property.description) && <PortableText value={property.description} />}
                 </div>
             </div>
