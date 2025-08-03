@@ -6,7 +6,7 @@ import { getSanityImageUrl } from "@/utils/sanity";
 const PROPERTIES_QUERY = `*[
   _type == "property" 
   && defined(slug.current)
-]{ _id, title, location, slug, publishedAt, image, description, price, roomNumber, isPublished }`;
+]|order(publishedAt desc)[0...12]{ _id, title, location, slug, publishedAt, image, description, price, roomNumber, isPublished }`;
 
 const DRAFTS_PROPERTIES_QUERY = `*[
   _type == "property"
